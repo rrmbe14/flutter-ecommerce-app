@@ -1,0 +1,43 @@
+{
+  "files.exclude": {
+    "build": true,
+    "**/*.g.dart": true,
+    "**/*.gr.dart": true,
+    "**/*.reflectable.dart": true,
+    "**/*.config.dart": true,
+    "**/*.mocks.dart": true,
+    "**/*.auto_mappr.dart": true,
+    "**/generated_plugin_registrant.dart": true
+  },
+  "debug.openDebug": "openOnDebugBreak",
+  "files.associations": {
+    "*.secrets": "json"
+  },
+  "[dart]": {
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit",
+      "source.sortMembers": "never",
+      "source.fixAll": "explicit"
+    },
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "editor.rulers": [
+      120
+    ],
+    "editor.selectionHighlight": false,
+    "editor.suggest.snippetsPreventQuickSuggestions": false,
+    "editor.suggestSelection": "first",
+    "editor.tabCompletion": "onlySnippets",
+    "editor.wordBasedSuggestions": "off"
+  },
+  "flutter-coverage.sufficientCoverageThreshold": 80,
+  "search.exclude": {
+    "**/.fvm": true
+  },
+  "files.watcherExclude": {
+    "**/.fvm": true
+  },
+  "dart.lineLength": 120,
+  "dart.onlyAnalyzeProjectsWithOpenFiles": true,
+  "dart.flutterSdkPath": ".fvm/versions/3.38.5"
+}

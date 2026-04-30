@@ -1,0 +1,158 @@
+# Inspired by https://gist.github.com/rydmike/fdb53ddd933c37d20e6f3188a936cd4c
+# Read more about linter packages here https://rydmike.com/blog_flutter_linting
+include: all_lint_rules.yaml
+formatter:
+  page_width: 120
+  trailing_commas: preserve
+analyzer:
+  exclude:
+    - lib/generated_plugin_registrant.dart
+    - lib/**/*.gen.dart
+    - lib/*.config.dart
+    - lib/**/*.config.dart
+    - lib/**/*.g.dart
+    - lib/**/*.gr.dart
+    - lib/main.reflectable.dart
+    - lib/**/generated/**
+    - lib/**/*.auto_mappr.dart
+    - test/**/*.config.dart
+    - test/**/*.mocks.dart
+    - test/**/*.gr.dart
+    - test/**/*.g.dart
+  errors:
+    # Without ignore here, we cause import of all_lint_rules to warn, because some rules conflict.
+    # We explicitly enabled even conflicting rules and are fixing the conflicts in this file.
+    # Put it to warning temporarily if you need to troubleshoot lint rule settings.
+    included_file_warning: ignore
+
+    # Treat missing required parameters as an error, not as a hint or a warning.
+    missing_required_param: error
+
+    # Treat missing returns as an error, not as a hint or a warning.
+    missing_return: error
+
+    # A record literal with exactly one positional field requires a trailing comma.
+    record_literal_one_positional_no_trailing_comma: error
+
+    # Invocation collection methods with arguments of unrelated types.
+    collection_methods_unrelated_type: warning
+
+    # Invocation of equality operator == with references of unrelated types.
+    unrelated_type_equality_checks: warning
+
+    # Allow self-reference to deprecated members. This is done because otherwise we have
+    # to annotate every member in every test, assert, etc., when we deprecate something.
+    deprecated_member_use_from_same_package: ignore
+
+    # DON'T assign new values to parameters of methods or functions.
+    # https://dart-lang.github.io/linter/lints/parameter_assignments.html
+    parameter_assignments: error
+
+  language:
+    strict-casts: true
+    strict-inference: true
+    strict-raw-types: true
+linter:
+  rules:
+    # Improves readability when viewing the code other than in an IDE.
+    always_specify_types: true
+
+    # Improves readability of package imports.
+    prefer_relative_imports: false
+
+    # Conflicts with strict inference.
+    avoid_annotating_with_dynamic: false
+
+    # Not always true. There are some cases that we need to catch everything.
+    avoid_catches_without_on_clauses: false
+
+    # Errors are thrown by other libraries.
+    avoid_catching_errors: false
+
+    # Useful for utility classes. Also provides additional context.
+    avoid_classes_with_only_static_members: false
+
+    # Promotes immutability.
+    avoid_final_parameters: false
+
+    # Not always true. Methods with one parameter should explicitly tell the parameter's purpose.
+    avoid_positional_boolean_parameters: false
+
+    # Improves readability of parameter values, rather than implicitly using the default value.
+    avoid_redundant_argument_values: false
+
+    # Conflicts with always_specify_types, but it improves readability.
+    avoid_types_on_closure_parameters: false
+
+    # Needed for view navigation parameters.
+    avoid_unused_constructor_parameters: false
+
+    # Prefer using async to avoid blocking
+    avoid_slow_async_io: false
+
+    # We recommend keeping it off as you probably won't be making diagnostic properties for all your
+    # classes, unless you are using a data class lib that does it for you via code generation.
+    diagnostic_describe_all_properties: false
+
+    # <Type>.fromEnvironment is needed for environment variables that are passed during build.
+    do_not_use_environment: false
+
+    # Useful if you are coding in a larger team, if not, you may also consider turning
+    # off the rule by removing its comment below.
+    flutter_style_todos: true
+
+    # We use 120 chars line length to utilize more the horizontal space of modern monitors.
+    lines_longer_than_80_chars: false
+
+    # Conflicts with 'always_specify_types' that is used, so then we can't have this rule either.
+    omit_local_variable_types: false
+
+    # Defining interfaces (abstract classes), with only one method, makes sense architecture wise.
+    one_member_abstracts: false
+
+    # This rule is mostly about what style you want to use and enforce, if any.
+    # It of course conflicts with rule prefer_single_quotes. Single quotes are easier to type.
+    # On our ISO keyboards it is next to Enter key, and we don't need the Shift plus the far to
+    # reach nr 2 key on R1 to type it. Also, we don't think they compromise on readability.
+    prefer_double_quotes: false
+
+    # Certainly a good idea in many cases, but not always. For example, not always suitable for
+    # Flutter, which may have a `build` method with a single return, but that return is still
+    # complex enough that a "body" is worth it, and it might not even fit on a single line.
+    prefer_expression_function_bodies: false
+
+    # We already have parameter_assignments enabled, so this rule is redundant.
+    prefer_final_parameters: false
+
+    # This rule goes against the preferred style of being explicit with declarations and hides
+    # when a number is double, since we cannot declare it as 0.0 or 1.0 when it is double,
+    # it has to be 0 or 1, making it look like an integer, even if it is not.
+    prefer_int_literals: false
+
+    # For an application, comments often are not needed, since the code should be self-explanatory.
+    public_member_api_docs: false
+
+    # This rule forces commas even in places where it just adds extra lines, that adds little value.
+    require_trailing_commas: false
+
+    # Not necessary since we are using DCM's member-ordering.
+    sort_constructors_first: false
+
+    # Incompatible with `prefer_final_locals` that we want because having immutable local variables when
+    # applicable makes larger functions more predictable and easier to reason about.
+    unnecessary_final: false
+
+    # Not generally true when you intend to seperate the your code using a line break.
+    cascade_invocations: false
+
+    # False positive for mutator methods for ValueNotifier/ValueListenable
+    use_setters_to_change_properties: false
+
+    # Conflicts with 'always_specify_types' that is used, so then we can't have this rule either,
+    # besides we like being verbose and specific. Why and when would omitting the type for local
+    # variables be a good thing anyway, be specific, is our take on this.
+    omit_obvious_property_types: false
+    omit_obvious_local_variable_types: false
+    
+    # Ignored since we don't need to always use variance on type parameters.
+    unsafe_variance: false
